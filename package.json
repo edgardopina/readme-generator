@@ -1,0 +1,22 @@
+{
+  "name": "bc-challenge-09",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseEPina/bc-challenge-09.git"
+  },
+  "keywords": [
+    "README"
+  ],
+  "author": "joseepina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoseEPina/bc-challenge-09/issues"
+  },
+  "homepage": "https://github.com/JoseEPina/bc-challenge-09#readme"
+}
