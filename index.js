@@ -2,52 +2,74 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
+
 // TODO: Create an array of questions for user input
-const userQuestions = [
-   // generate questions for sections to be included
+const userHeaders = [
    {
       type: 'input',
       name: 'projectTitle',
-      message: 'What is the title of your project? (Required)',
-      validate: (titleInput) => {
-         if (titleInput) {
+      message: 'What is the title of your Project? (Required)',
+      validate: (notEmpty) => {
+         if (notEmpty) {
             return true;
          } else {
-            console.log('Please enter the name of your project.');
+            console.log('Please enter the name of your project!');
             return false;
          }
       },
    },
    {
-      type: 'checkbox',
-      name: 'sections',
-      message: 'What sections would you like to include? (Check all that apply)',
-      choices: [
-         {
-            name: 'Description',
-            checked: true,
-         },
-         { name: 'Table of Contents' },
-         { name: 'Installation' },
-         { name: 'Usage' },
-         { name: 'Credits' },
-         { name: 'License' },
-         { name: 'Badges' },
-         { name: 'Features' },
-         { name: 'Contributing' },
-         { name: 'Tests' },
-         { name: 'Questions' },
-      ],
-      validate(answer) {
-         if (answer.length < 1) {
-            return 'You must choose at least one section.';
+      type: 'editor',
+      name: 'description',
+      message:
+         'Enter a detailed PROJECT DESCRIPTION or leave EMPTY: (for Windows NotePad use menu options Format/Word-Wrap to get better capture experience; use ctrl-s: to save the file; use alt-f x to exit editor)',
+      validate: (notEmpty) => {
+         if (notEmpty) {
+            return true;
+         } else {
+            console.log('Please enter a valid PROJECT DESCRIPTION.');
+            return false;
          }
-         return true;
       },
+   },
+   {
+      type: 'editor',
+      name: 'installation',
+      message:
+         'Enter detailed INSTALLATION INSTRUCTIONS or leave EMPTY: (for Windows NotePad follow the same instructions above)',
+   },
+   {
+      type: 'editor',
+      name: 'usage',
+      message:
+         'Enter detailed instructions about you app USAGE or leave EMPTY: (for Windows NotePad use the same instructions above)',
+   },
+   {
+      type: 'input',
+      name: 'imageVideo1',
+      message:
+         "Enter USAGE image-1/video-1 file name with extension; i.e. videoFile1.mp4 or leave EMPTY: (for Windows NotePad use the same instructions above)' after your FIRST paragraph of the USAGE section (upload your file in the './assets/images-videos/' folder)",
+   },
+   {
+      type: 'input',
+      name: 'imageVideo2',
+      message:
+         "Enter USAGE image-2/video-2 file name with extension; i.e. videoFile2.mp4 or leave EMPTY. It will be placed after your SECOND paragraph of the USAGE section (upload your file in the './assets/images-videos/' folder)",
+   },
+   {
+      type: 'input',
+      name: 'imageVideo3',
+      message:
+         "Enter USAGE image-3/video-3 file name with extension; i.e. videoFile3.mp4 or leave EMPTY. It will be placed after your THIRD paragraph of the USAGE section (upload your file in the './assets/images-videos/' folder)",
+   },
+   {
+      type: 'editor',
+      name: 'credits',
+      message: 'Enter the CREDITS section or leave EMPTY: (for Windows NotePad use the same instructions above)',
    },
 ];
 
-// TODO: Create a function to write README file
+//TODO: Create a function to write README file
 function writeToFile(fileName, data) {
    return new Promise((resolve, reject) => {
       fs.writeFile(fileName, data, (err) => {
@@ -66,34 +88,25 @@ function writeToFile(fileName, data) {
    });
 }
 
+function promptData(promptArr) {
+   return inquirer.prompt(promptArr);
+}
+
 // TODO: Create a function to initialize app
 function init() {
-   return inquirer.prompt(userQuestions);
+   // return promptData(userHeaders);
+   return inquirer.prompt(userHeaders);
 }
 
 // Function call to initialize app
 init()
-   .then((data) => {
-      return generateMarkdown(data);
+   .then((headers) => {
+      console.log(headers);
+      return generateMarkdown(headers);
    })
-   .then((readmeData) => {
-      return writeToFile('./README.md', readmeData);
+   .then((readmePage) => {
+      return console.log('README.md page: ', readmePage);
    })
-   .then(writeResponse => console.log(writeResponse));
-
-//#region region
-// const questions = [
-//    {
-//       type: 'editor',
-//       name: 'bio',
-//       message: 'Please write a short bio of at least 3 lines.',
-//       validate(text) {
-//          if (text.split('\n').length < 3) {
-//             return 'Must be at least 3 lines.';
-//          }
-
-//          return true;
-//       },
-//    },
-// ];
-//#endregion
+   .finally(() => {
+      console.log('\n completed ');
+   });
