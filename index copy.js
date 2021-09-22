@@ -44,13 +44,6 @@ const userHeaders = [
       message:
          'Enter detailed instructions about you app USAGE or leave EMPTY: (for Windows NotePad use the same instructions above)',
    },
-
-   {
-      type: 'editor',
-      name: 'license',
-      message: 'Enter the CREDITS section or leave EMPTY: (for Windows NotePad use the same instructions above)',
-   },
-
    {
       type: 'editor',
       name: 'contributing',
@@ -65,10 +58,9 @@ const userHeaders = [
 
    {
       type: 'editor',
-      name: 'questions',
+      name: 'credits',
       message: 'Enter the CREDITS section or leave EMPTY: (for Windows NotePad use the same instructions above)',
    },
-
 ];
 
 //TODO: Create a function to write README file
