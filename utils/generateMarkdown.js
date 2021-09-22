@@ -21,57 +21,18 @@ function generateMarkdown(data) {
       readmePage += `## Installation\n`;
       readmePage += `${data.installation}\n`;
    }
+
    if (data.usage) {
       readmePage += `## Usage\n`;
-      let usagePar = data.usage.split('\r\n');
-      console.log(data.usage, usagePar);
-      let imgCounter = 0;
-      let displayImg = [false, false, false];
-      if (data.imageVideo1) {
-         displayImg[imgCounter] = true;
-         imgCounter++;
-      }
-      if (data.imageVideo2) {
-         displayImg[imgCounter] = true;
-         imgCounter++;
-      }
-      if (data.imageVideo3) {
-         displayImg[imgCounter] = true;
-         imgCounter++;
-      }
-      imgCounter = 0;
-      usagePar.forEach((elem) => {
-         readmePage += `- ${elem}`;
-         if (elem) {
-            if (parCounter === 1 && data.imageVideo1) {
-               readmePage += !['myAltText']('./assets/images/' + data.imageVideo1);
-               displayImg[imgCounter] = false;
-               imgCounter++;
-            }
-            if (parCounter === 2 && data.imageVideo2) {
-               readmePage += !['myAltText']('./assets/images/' + data.imageVideo2);
-               displayImg[imgCounter] = false;
-               imgCounter++;
-            }
-            if (parCounter === 3 && data.imageVideo3) {
-               readmePage += !['myAltText']('./assets/images/' + data.imageVideo3);
-               displayImg[imgCounter] = false;
-               imgCounter++;
-            }
-         }
-      });
-      for (let i = 0; i < 3; i++) {
-         if (displayImg[i]) {
-            readmePage += !['myAltText']('./assets/images/' + data.imageVideo + (i + 1));
-         }
-      }
+      readmePage += `${data.usage}\n`;
    }
+
    if (data.credits) {
       readmePage += `## Credits\n`;
       readmePage += `${data.credits}\n`;
    }
 
-   // console.log(readmePage);
+   console.log(readmePage);
    return readmePage;
 }
 

@@ -44,24 +44,7 @@ const userHeaders = [
       message:
          'Enter detailed instructions about you app USAGE or leave EMPTY: (for Windows NotePad use the same instructions above)',
    },
-   {
-      type: 'input',
-      name: 'imageVideo1',
-      message:
-         "Enter USAGE image-1/video-1 file name with extension; i.e. videoFile1.mp4 or leave EMPTY: (for Windows NotePad use the same instructions above)' after your FIRST paragraph of the USAGE section (upload your file in the './assets/images-videos/' folder)",
-   },
-   {
-      type: 'input',
-      name: 'imageVideo2',
-      message:
-         "Enter USAGE image-2/video-2 file name with extension; i.e. videoFile2.mp4 or leave EMPTY. It will be placed after your SECOND paragraph of the USAGE section (upload your file in the './assets/images-videos/' folder)",
-   },
-   {
-      type: 'input',
-      name: 'imageVideo3',
-      message:
-         "Enter USAGE image-3/video-3 file name with extension; i.e. videoFile3.mp4 or leave EMPTY. It will be placed after your THIRD paragraph of the USAGE section (upload your file in the './assets/images-videos/' folder)",
-   },
+
    {
       type: 'editor',
       name: 'credits',
@@ -88,10 +71,6 @@ function writeToFile(fileName, data) {
    });
 }
 
-function promptData(promptArr) {
-   return inquirer.prompt(promptArr);
-}
-
 // TODO: Create a function to initialize app
 function init() {
    // return promptData(userHeaders);
@@ -101,11 +80,10 @@ function init() {
 // Function call to initialize app
 init()
    .then((headers) => {
-      console.log(headers);
       return generateMarkdown(headers);
    })
    .then((readmePage) => {
-      return console.log('README.md page: ', readmePage);
+      return writeToFile('./README.md', readmePage);
    })
    .finally(() => {
       console.log('\n completed ');
