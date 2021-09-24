@@ -1,7 +1,14 @@
 // TODO: Include packages needed for this application
-const fs = require('fs');
-const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown.js');
+import { writeFile } from 'fs';
+import inquirer from 'inquirer';
+import generateMarkdown from './utils/generateMarkdown.js';
+import fetch from 'node-fetch';
+
+// Container for License name & url link from gitHub API. Global Scope.
+const licenseList = {
+   name: [],
+   url: [],
+};
 
 // TODO: Create an array of questions for user input
 const userHeaders = [
@@ -68,13 +75,12 @@ const userHeaders = [
       name: 'questions',
       message: 'Enter the CREDITS section or leave EMPTY: (for Windows NotePad use the same instructions above)',
    },
-
 ];
 
 //TODO: Create a function to write README file
 function writeToFile(fileName, data) {
    return new Promise((resolve, reject) => {
-      fs.writeFile(fileName, data, (err) => {
+      writeFile(fileName, data, (err) => {
          // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
          if (err) {
             reject(err);
@@ -91,19 +97,41 @@ function writeToFile(fileName, data) {
 }
 
 // TODO: Create a function to initialize app
-function init() {
+async function init() {
    // return promptData(userHeaders);
-   return inquirer.prompt(userHeaders);
+   // return inquirer.prompt(userHeaders);
+
+   const promise = await fetch('https://api.github.com/licenses', {
+      headers: {
+         Accept: 'application/vnd.github.v3+json',
+      },
+   });
+   const licenseData = await promise.json();
+   console.log('licenseData:\n', licenseData);
+   
+   
+   licenseData.forEach((elem) => {
+      licenseList.name.push(elem.name);
+      licenseList.url.push(elem.url);
+   });
+
+   // for (let i = 0; i < licenseData.length; ++i) {
+   //    licenseList.name.push(licenseData[i].name);
+   //    licenseList.url.push(licenseData[i].url);
+   // }
+   
+   console.log(licenseList);
+   return licenseData;
 }
 
 // Function call to initialize app
-init()
-   .then((headers) => {
-      return generateMarkdown(headers);
-   })
-   .then((readmePage) => {
-      return writeToFile('./README.md', readmePage);
-   })
-   .finally(() => {
-      console.log('\n completed ');
-   });
+init();
+// .then((headers) => {
+//    return generateMarkdown(headers);
+// })
+// .then((readmePage) => {
+//    return writeToFile('./README.md', readmePage);
+// })
+// .finally(() => {
+//    console.log('\n completed ');
+// });
