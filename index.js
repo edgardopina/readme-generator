@@ -11,7 +11,7 @@ const licenseList = {
 };
 
 // TODO: Create an array of questions for user input
-const userHeaders = [
+const userPrompts = [
    {
       type: 'input',
       name: 'projectTitle',
@@ -25,56 +25,66 @@ const userHeaders = [
          }
       },
    },
+   // {
+   //    type: 'editor',
+   //    name: 'description',
+   //    message:
+   //       'Enter a detailed PROJECT DESCRIPTION or leave EMPTY: (for Windows NotePad use menu options Format/Word-Wrap to get better capture experience; use ctrl-s: to save the file; use alt-f x to exit editor)',
+   //    validate: (notEmpty) => {
+   //       if (notEmpty) {
+   //          return true;
+   //       } else {
+   //          console.log('Please enter a valid PROJECT DESCRIPTION.');
+   //          return false;
+   //       }
+   //    },
+   // },
+   // {
+   //    type: 'editor',
+   //    name: 'installation',
+   //    message:
+   //       'Enter detailed INSTALLATION INSTRUCTIONS or leave EMPTY: (for Windows NotePad follow the same instructions above)',
+   // },
+   // {
+   //    type: 'editor',
+   //    name: 'usage',
+   //    message:
+   //       'Enter detailed instructions about you app USAGE or leave EMPTY: (for Windows NotePad use the same instructions above)',
+   // },
+
    {
-      type: 'editor',
-      name: 'description',
-      message:
-         'Enter a detailed PROJECT DESCRIPTION or leave EMPTY: (for Windows NotePad use menu options Format/Word-Wrap to get better capture experience; use ctrl-s: to save the file; use alt-f x to exit editor)',
-      validate: (notEmpty) => {
-         if (notEmpty) {
-            return true;
-         } else {
-            console.log('Please enter a valid PROJECT DESCRIPTION.');
-            return false;
-         }
-      },
-   },
-   {
-      type: 'editor',
-      name: 'installation',
-      message:
-         'Enter detailed INSTALLATION INSTRUCTIONS or leave EMPTY: (for Windows NotePad follow the same instructions above)',
-   },
-   {
-      type: 'editor',
-      name: 'usage',
-      message:
-         'Enter detailed instructions about you app USAGE or leave EMPTY: (for Windows NotePad use the same instructions above)',
+      type: 'input',
+      name: 'licenseGrantor',
+      message: 'Enter the NAME of the License Grantor: ',
    },
 
    {
-      type: 'editor',
-      name: 'license',
-      message: 'Enter the CREDITS section or leave EMPTY: (for Windows NotePad use the same instructions above)',
-   },
-
-   {
-      type: 'editor',
-      name: 'contributing',
-      message: 'Enter detailed contributing info or leave EMPTY: (for Windows NotePad use the same instructions above)',
-   },
-   {
-      type: 'editor',
-      name: 'tests',
+      type: 'list',
+      name: 'licenseType',
       message:
-         'Enter detailed Testing information about your app or leave EMPTY: (for Windows NotePad use the same instructions above)',
+         'Select from one of the following licenses: (for a detailed explanation, please visit https://choosealicense.com)',
+      choices: licenseList.name,
+      loop: false,
    },
 
-   {
-      type: 'editor',
-      name: 'questions',
-      message: 'Enter the CREDITS section or leave EMPTY: (for Windows NotePad use the same instructions above)',
-   },
+   // {
+   //    type: 'editor',
+   //    name: 'contributing',
+   //    message: 'Enter detailed contributing info or leave EMPTY: (for Windows NotePad use the same instructions above)',
+   // },
+   
+   // {
+   //    type: 'editor',
+   //    name: 'tests',
+   //    message:
+   //       'Enter detailed Testing information about your app or leave EMPTY: (for Windows NotePad use the same instructions above)',
+   // },
+
+   // {
+   //    type: 'editor',
+   //    name: 'questions',
+   //    message: 'Enter the CREDITS section or leave EMPTY: (for Windows NotePad use the same instructions above)',
+   // },
 ];
 
 //TODO: Create a function to write README file
@@ -98,9 +108,6 @@ function writeToFile(fileName, data) {
 
 // TODO: Create a function to initialize app
 async function init() {
-   // return promptData(userHeaders);
-   // return inquirer.prompt(userHeaders);
-
    const promise = await fetch('https://api.github.com/licenses', {
       headers: {
          Accept: 'application/vnd.github.v3+json',
@@ -108,8 +115,7 @@ async function init() {
    });
    const licenseData = await promise.json();
    console.log('licenseData:\n', licenseData);
-   
-   
+
    licenseData.forEach((elem) => {
       licenseList.name.push(elem.name);
       licenseList.url.push(elem.url);
@@ -119,19 +125,20 @@ async function init() {
    //    licenseList.name.push(licenseData[i].name);
    //    licenseList.url.push(licenseData[i].url);
    // }
-   
+
    console.log(licenseList);
-   return licenseData;
+   return inquirer.prompt(userPrompts);
 }
 
 // Function call to initialize app
-init();
-// .then((headers) => {
-//    return generateMarkdown(headers);
-// })
-// .then((readmePage) => {
-//    return writeToFile('./README.md', readmePage);
-// })
-// .finally(() => {
-//    console.log('\n completed ');
-// });
+init()
+   .then((sections) => {
+      console.log(sections);
+      return generateMarkdown(sections);
+   })
+   .then((readmePage) => {
+      return writeToFile('./README.md', readmePage);
+   })
+   .finally(() => {
+      console.log('\n completed ');
+   });

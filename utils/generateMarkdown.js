@@ -64,10 +64,12 @@ function generateMarkdown(data) {
       readmePage += `${data.usage}\n`;
    }
 
-   if (data.license) {
-      readmePage += `## License\n`;
-      readmePage += `${data.license}\n`;
-   }
+   readmePage += `## License\n`;
+   readmePage += `
+Copyright (c) ${data.licenseGrantor}. All rights reserved.
+
+Licensed under the ${data.licenseType}.
+`;
 
    if (data.contributing) {
       readmePage += `## Contributing\n`;
