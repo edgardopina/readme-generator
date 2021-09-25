@@ -15,76 +15,156 @@ const userPrompts = [
    {
       type: 'input',
       name: 'projectTitle',
-      message: 'What is the title of your Project? (Required)',
+      message: "\nPlease enter your PROJECT'S TITLE? (Required)",
       validate: (notEmpty) => {
          if (notEmpty) {
             return true;
          } else {
-            console.log('Please enter the name of your project!');
             return false;
          }
       },
    },
-   // {
-   //    type: 'editor',
-   //    name: 'description',
-   //    message:
-   //       'Enter a detailed PROJECT DESCRIPTION or leave EMPTY: (for Windows NotePad use menu options Format/Word-Wrap to get better capture experience; use ctrl-s: to save the file; use alt-f x to exit editor)',
-   //    validate: (notEmpty) => {
-   //       if (notEmpty) {
-   //          return true;
-   //       } else {
-   //          console.log('Please enter a valid PROJECT DESCRIPTION.');
-   //          return false;
-   //       }
-   //    },
-   // },
-   // {
-   //    type: 'editor',
-   //    name: 'installation',
-   //    message:
-   //       'Enter detailed INSTALLATION INSTRUCTIONS or leave EMPTY: (for Windows NotePad follow the same instructions above)',
-   // },
-   // {
-   //    type: 'editor',
-   //    name: 'usage',
-   //    message:
-   //       'Enter detailed instructions about you app USAGE or leave EMPTY: (for Windows NotePad use the same instructions above)',
-   // },
-
+   {
+      type: 'editor',
+      name: 'description',
+      message:
+         '\nEnter a short DESCRIPTION explaining the what, why, and how of your project. What was your motivation? Why did you build this project? What problem does it solve? What did you learn? What makes your project stand out?. (Required)',
+      validate: (notEmpty) => {
+         if (notEmpty) {
+            return true;
+         } else {
+            return false;
+         }
+      },
+   },
+   {
+      type: 'confirm',
+      name: 'confirmInstallation',
+      message: '\nDo you want to add an INSTALLATION section?',
+      default: true,
+   },
+   {
+      type: 'editor',
+      name: 'installation',
+      message:
+         '\nWhat are the steps required to INSTALL  your project? Provide a step-by-step description of how to get the development environment running or leave EMPTY.',
+      when: (answers) => answers.confirmInstallation,
+   },
+   {
+      type: 'confirm',
+      name: 'confirmUsage',
+      message: '\nDo you want to add an USAGE section?',
+      default: true,
+   },
+   {
+      type: 'editor',
+      name: 'usage',
+      message:
+         '\nProvide USAGE instructions and examples for use, include screenshots/videos as needed or leave EMPTY.',
+      when: (answers) => answers.confirmUsage,
+   },
+   {
+      type: 'confirm',
+      name: 'confirmCredits',
+      message: '\nDo you want to add a CREDITS section?',
+      default: true,
+   },
+   {
+      type: 'editor',
+      name: 'credits',
+      message:
+         '\nList your collaborators CREDITS, if any, with links to their GitHub profiles. If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section. If you followed tutorials, include links to those here as well or leave EMPTY.',
+      when: (answers) => answers.confirmCredits,
+   },
+   {
+      type: 'confirm',
+      name: 'confirmLicense',
+      message: '\nDo you want to add a LICENSE section?',
+      default: true,
+   },
    {
       type: 'input',
       name: 'licenseGrantor',
-      message: 'Enter the NAME of the License Grantor: ',
+      message: 'Enter the name of the LICENSE GRANTOR: (Required)',
+      validate: (notEmpty) => {
+         if (notEmpty) {
+            return true;
+         } else {
+            return false;
+         }
+      },
+      when: (answers) => answers.confirmLicense,
    },
-
    {
       type: 'list',
       name: 'licenseType',
       message:
-         'Select from one of the following licenses: (for a detailed explanation, please visit https://choosealicense.com)',
+         'Select from one of the following LICENSE TYPES: (for a detailed explanation, please visit https://choosealicense.com)',
       choices: licenseList.name,
       loop: false,
+      when: (answers) => answers.confirmLicense,
    },
-
-   // {
-   //    type: 'editor',
-   //    name: 'contributing',
-   //    message: 'Enter detailed contributing info or leave EMPTY: (for Windows NotePad use the same instructions above)',
-   // },
-   
-   // {
-   //    type: 'editor',
-   //    name: 'tests',
-   //    message:
-   //       'Enter detailed Testing information about your app or leave EMPTY: (for Windows NotePad use the same instructions above)',
-   // },
-
-   // {
-   //    type: 'editor',
-   //    name: 'questions',
-   //    message: 'Enter the CREDITS section or leave EMPTY: (for Windows NotePad use the same instructions above)',
-   // },
+   {
+      type: 'confirm',
+      name: 'confirmFeatures',
+      message: '\nDo you want to add a FEATURES section?',
+      default: true,
+   },
+   {
+      type: 'editor',
+      name: 'features',
+      message: '\nAdd your project main FEATURES here or leave EMPTY.',
+      when: (answers) => answers.confirmFeatures,
+   },
+   {
+      type: 'confirm',
+      name: 'confirmContribute',
+      message: '\nDo you want to add a CONTRIBUTING section?',
+      default: true,
+   },
+   {
+      type: 'editor',
+      name: 'contributing',
+      message:
+         "\nIf you created an application or package and would like other developers to contribute it, you will want to add guidelines for how to do so. The 'Contributor Covenant' (https://www.contributor-covenant.org/) is an industry standard, but you can write your own or leave it EMPTY.",
+      when: (answers) => answers.confirmContribute,
+   },
+   {
+      type: 'confirm',
+      name: 'confirmTests',
+      message: '\nDo you want to add a TESTS section?',
+      default: true,
+   },
+   {
+      type: 'editor',
+      name: 'tests',
+      message: '\nIf you wrote TESTS for your app, then provide examples on how to run them or leave EMPTY.',
+      when: (answers) => answers.confirmTests,
+   },
+   {
+      type: 'input',
+      name: 'gitHubUser',
+      message: 'Enter your GitHub username: (Required)',
+      validate: (notEmpty) => {
+         if (notEmpty) {
+            return true;
+         } else {
+            return false;
+         }
+      },
+   },
+   {
+      type: 'input',
+      name: 'email',
+      message: 'Enter a valid email address: (Required)',
+      validate: (notEmpty) => {
+         if (notEmpty) {
+            return true;
+         } else {
+            return false;
+         }
+      },
+   },
 ];
 
 //TODO: Create a function to write README file
