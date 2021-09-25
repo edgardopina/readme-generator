@@ -1,47 +1,12 @@
-var license = [
-   'Academic Free License v3.0',
-   'Apache license 2.0',
-   'Artistic license 2.0',
-   'Boost Software License 1.0',
-   'BSD 2-clause "Simplified" license',
-   'BSD 3-clause "New" or "Revised" license',
-   'BSD 3-clause Clear license',
-   'Creative Commons license family',
-   'Creative Commons Zero v1.0 Universal',
-   'Creative Commons Attribution 4.0',
-   'Creative Commons Attribution Share Alike 4.0',
-   'Do What The F*ck You Want To Public License',
-   'Educational Community License v2.0',
-   'Eclipse Public License 1.0',
-   'Eclipse Public License 2.0',
-   'European Union Public License 1.1',
-   'GNU Affero General Public License v3.0',
-   'GNU General Public License family',
-   'GNU General Public License v2.0',
-   'GNU General Public License v3.0',
-   'GNU Lesser General Public License family',
-   'GNU Lesser General Public License v2.1',
-   'GNU Lesser General Public License v3.0',
-   'ISC',
-   'LaTeX Project Public License v1.3c',
-   'Microsoft Public License',
-   'MIT',
-   'Mozilla Public License 2.0',
-   'Open Software License 3.0',
-   'PostgreSQL License',
-   'SIL Open Font License 1.1',
-   'University of Illinois/NCSA Open Source License',
-   'The Unlicense',
-   'zLib License',
-];
 import { makeBadge, ValidationError } from 'badge-maker';
+import licenseList from './licenseList.js';
 
-const badge = {
+const licenseBadge = {
    label: 'License',
-   message: 'MIT',
+   message: ``,
    labelColor: 'black',
    color: '#ce090a',
-   style: 'for-the-badge',
+   style: 'plastic',
 };
 
 // TODO: Create a function that returns a license badge based on which license is passed in
@@ -58,14 +23,15 @@ function renderLicenseSection(license) {}
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
+   let badge = ``;
    let readmePage1 = `# ${data.projectTitle}\n`;
-   readmePage1 += `${makeBadge(badge)}\n`;
    let TOC = `## Table of Contents\n
 `;
    let readmePage2 = ``;
 
    if (data.description) {
       readmePage1 += `## Description\n`;
+
       readmePage1 += `${data.description}\n
 `;
    }
@@ -93,10 +59,14 @@ function generateMarkdown(data) {
 
    if (data.confirmLicense) {
       readmePage2 += `## License\n`;
+      let index = licenseList.name.findIndex((elem) => elem === data.licenseType);
+      licenseBadge.message = `${licenseList.name[index]}`;
+      badge = `${makeBadge(licenseBadge)}\n`;
+
       readmePage2 += `
    Copyright (c) ${data.licenseGrantor}. All rights reserved.
    
-   Licensed under the ${data.licenseType}.
+   Licensed under the [${data.licenseType}](${licenseList.url[index]}).
 `;
       TOC += `* [License](#license)
 `;
@@ -129,14 +99,14 @@ function generateMarkdown(data) {
 
 README Generator created by [${data.gitHubUser}](https://github.com/${data.gitHubUser})
 
-gitHub Email Address: [${data.email}](${data.email})\n
+GitHub Email Address: [${data.email}](${data.email})\n
 `;
       TOC += `* [Questions](#questions)
 `;
    }
 
-   console.log(readmePage1 + TOC + readmePage2);
-   return readmePage1 + TOC + readmePage2;
+   console.log(readmePage1 + badge + TOC + readmePage2);
+   return readmePage1 + badge + TOC + readmePage2;
 }
 
 // console.log('section: ', section);
