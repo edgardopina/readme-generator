@@ -34,6 +34,15 @@ var license = [
    'The Unlicense',
    'zLib License',
 ];
+import { makeBadge, ValidationError } from 'badge-maker';
+
+const badge = {
+   label: 'License',
+   message: 'MIT',
+   labelColor: 'black',
+   color: '#ce090a',
+   style: 'for-the-badge',
+};
 
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
@@ -50,6 +59,7 @@ function renderLicenseSection(license) {}
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
    let readmePage1 = `# ${data.projectTitle}\n`;
+   readmePage1 += `${makeBadge(badge)}\n`;
    let TOC = `## Table of Contents\n
 `;
    let readmePage2 = ``;

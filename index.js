@@ -2,6 +2,7 @@
 import { writeFile } from 'fs';
 import inquirer from 'inquirer';
 import generateMarkdown from './utils/generateMarkdown.js';
+import { makeBadge, ValidationError } from 'badge-maker';
 import fetch from 'node-fetch';
 
 // Container for License name & url link from gitHub API. Global Scope.
@@ -9,6 +10,8 @@ const licenseList = {
    name: [],
    url: [],
 };
+
+
 
 // TODO: Create an array of questions for user input
 const userPrompts = [
@@ -198,7 +201,7 @@ async function init() {
 
    licenseData.forEach((elem) => {
       licenseList.name.push(elem.name);
-      licenseList.url.push(elem.url);
+      licenseList.url.push(elem.html_url);
    });
 
    // for (let i = 0; i < licenseData.length; ++i) {
