@@ -24,46 +24,48 @@ function renderLicenseSection(license) {}
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
    let badge = ``;
-   let readmePage1 = `# ${data.projectTitle}\n`;
+   let title = `# ${data.projectTitle}\n`;
    let TOC = `## Table of Contents\n
 `;
-   let readmePage2 = ``;
+   let description = ``;
+   let content = ``;
 
    if (data.description) {
-      readmePage1 += `## Description\n`;
+      description += `## Description\n`;
 
-      readmePage1 += `${data.description}\n
+      description += `${data.description}\n
 `;
    }
 
    if (data.confirmInstallation) {
-      readmePage2 += `## Installation\n`;
-      readmePage2 += `${data.installation}\n`;
+      content += `## Installation\n`;
+      content += `${data.installation}\n`;
       TOC += `* [Installation](#installation)
 `;
    }
 
    if (data.confirmUsage) {
-      readmePage2 += `## Usage\n`;
-      readmePage2 += `${data.usage}\n`;
+      content += `## Usage\n`;
+      content += `${data.usage}\n`;
       TOC += `* [Usage](#usage)
 `;
    }
 
    if (data.confirmCredits) {
-      readmePage2 += `## Credits\n`;
-      readmePage2 += `${data.credits}\n`;
+      content += `## Credits\n`;
+      content += `${data.credits}\n`;
       TOC += `* [Credits](#credits)
 `;
    }
 
    if (data.confirmLicense) {
-      readmePage2 += `## License\n`;
       let index = licenseList.name.findIndex((elem) => elem === data.licenseType);
       licenseBadge.message = `${licenseList.name[index]}`;
-      badge = `${makeBadge(licenseBadge)}\n`;
+      badge = `${makeBadge(licenseBadge)}\n
+`;
+      content += `## License\n`;
 
-      readmePage2 += `
+      content += `
    Copyright (c) ${data.licenseGrantor}. All rights reserved.
    
    Licensed under the [${data.licenseType}](${licenseList.url[index]}).
@@ -73,29 +75,29 @@ function generateMarkdown(data) {
    }
 
    if (data.confirmFeatures) {
-      readmePage2 += `## Features\n`;
-      readmePage2 += `${data.features}\n`;
+      content += `## Features\n`;
+      content += `${data.features}\n`;
       TOC += `* [Features](#features)
 `;
    }
 
    if (data.confirmContribute) {
-      readmePage2 += `## Contributing\n`;
-      readmePage2 += `${data.contributing}\n`;
+      content += `## Contributing\n`;
+      content += `${data.contributing}\n`;
       TOC += `* [Contributing](#contributing)
 `;
    }
 
    if (data.confirmTests) {
-      readmePage2 += `## Tests\n`;
-      readmePage2 += `${data.tests}\n`;
+      content += `## Tests\n`;
+      content += `${data.tests}\n`;
       TOC += `* [Tests](#tests)
 `;
    }
 
    {
-      readmePage2 += `## Questions\n`;
-      readmePage2 += `
+      content += `## Questions\n`;
+      content += `
 
 README Generator created by [${data.gitHubUser}](https://github.com/${data.gitHubUser})
 
@@ -105,8 +107,8 @@ GitHub Email Address: [${data.email}](${data.email})\n
 `;
    }
 
-   console.log(readmePage1 + badge + TOC + readmePage2);
-   return readmePage1 + badge + TOC + readmePage2;
+   console.log(title + badge + description + TOC + content);
+   return title + badge + description + TOC + content;
 }
 
 // console.log('section: ', section);
