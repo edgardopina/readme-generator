@@ -106,7 +106,7 @@ const userPrompts = [
       type: 'confirm',
       name: 'confirmCredits',
       message: '\nDo you want to add a CREDITS section?',
-      default: true,
+      default: false,
    },
    {
       type: 'editor',
@@ -147,7 +147,7 @@ const userPrompts = [
       type: 'confirm',
       name: 'confirmFeatures',
       message: '\nDo you want to add a FEATURES section?',
-      default: true,
+      default: false,
    },
    {
       type: 'editor',
@@ -159,7 +159,7 @@ const userPrompts = [
       type: 'confirm',
       name: 'confirmContribute',
       message: '\nDo you want to add a CONTRIBUTING section?',
-      default: true,
+      default: false,
    },
    {
       type: 'editor',
@@ -172,7 +172,7 @@ const userPrompts = [
       type: 'confirm',
       name: 'confirmTests',
       message: '\nDo you want to add a TESTS section?',
-      default: true,
+      default: false,
    },
    {
       type: 'editor',
