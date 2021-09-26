@@ -1,6 +1,6 @@
-import {makeBadge, ValidationError} from 'badge-maker'; // import badge-maker into node
+import { makeBadge, ValidationError } from 'badge-maker'; // import badge-maker into node
 // import Obj data of licenseList obtained from fetch, for use in markdown.
-import licenseList from './licenseList.js'; 
+import licenseList from './licenseList.js';
 
 // declare a Badge object to use with badge-maker program
 const licenseBadge = {
@@ -42,9 +42,10 @@ function renderLicenseSection(data) {
    if (data.confirmLicense) {
       let index = licenseList.name.findIndex((elem) => elem === data.licenseType);
       badge = renderLicenseBadge(index);
+      let year = new Date();
       let section = `## License\n`;
       section += `
-   Copyright (c) ${data.licenseGrantor}. All rights reserved.
+   Copyright (c) ${year.getFullYear()} ${data.licenseGrantor}. All rights reserved.
    
    Licensed under the [${data.licenseType}](${renderLicenseLink(index)}).
 `;
@@ -60,35 +61,39 @@ function renderLicenseSection(data) {
 function generateMarkdown(data) {
    let title = `# ${data.projectTitle}\n`;
    TOC = `## Table of Contents\n
-
 `;
    let description = ``;
    let content = ``;
 
    if (data.description) {
-      description += `## Description\n`;
-
+      description += `## Description\n
+`;
       description += `${data.description}\n
 `;
    }
 
    if (data.confirmInstallation) {
-      content += `## Installation\n`;
+      content += `## Installation\n
+`;
       content += `${data.installation}\n`;
       TOC += `* [Installation](#installation)
 `;
    }
 
    if (data.confirmUsage) {
-      content += `## Usage\n`;
-      content += `${data.usage}\n`;
+      content += `## Usage\n
+`;
+      content += `${data.usage}\n
+`;
       TOC += `* [Usage](#usage)
 `;
    }
 
    if (data.confirmCredits) {
-      content += `## Credits\n`;
-      content += `${data.credits}\n`;
+      content += `## Credits\n
+`;
+      content += `${data.credits}\n
+`;
       TOC += `* [Credits](#credits)
 `;
    }
@@ -127,14 +132,8 @@ GitHub Email Address: [${data.email}](${data.email})\n
       TOC += `* [Questions](#questions)
 `;
    }
-
-   console.log(title + badge + description + TOC + content);
+   // console.log(title + badge + description + TOC + content); //console.log left for testing
    return title + badge + description + TOC + content;
 }
 
-// console.log('section: ', section);
 export default generateMarkdown;
-
-/*
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis illo maxime omnis itaque autem sapiente, eius expedita quibusdam. Earum quasi quo, aut tempora cumque eligendi suscipit beatae! Amet, possimus doloribus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis illo maxime omnis itaque autem sapiente, eius expedita quibusdam. Earum quasi quo, aut tempora cumque eligendi suscipit beatae! Amet, possimus doloribus.
-*/
