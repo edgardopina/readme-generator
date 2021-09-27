@@ -1,9 +1,9 @@
-# Testing
+# Hello Title
 
-![License Badge](./assets/images/badge.svg)
-## Description
+![License Badge](./assets/images/badge.svg)## Description
 
 Hello
+
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ Hello
 
 
 
-README Generator created by [JoseEPina](https://github.com/JoseEPina).
+README Generator created by [joseepina](https://github.com/joseepina).
 
 For any additional questions or comments, please send a message to the following address:
 

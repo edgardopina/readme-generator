@@ -1,7 +1,7 @@
-import { writeFile } from 'fs';
 import { makeBadge, ValidationError } from 'badge-maker'; // import badge-maker into node
 // import Obj data of licenseList obtained from fetch, for use in markdown.
 import licenseList from './licenseList.js';
+// import function to create a file (for badge.svg file)
 import writeToFile from '../index.js';
 
 // declare a Badge object to use with badge-maker program
@@ -24,9 +24,9 @@ function renderLicenseBadge(index) {
    // if value is > -1, then there is a license present from the prompts' input data.
    if (index >= 0) {
       licenseBadge.message = `${licenseList.name[index]}`;
-      badge = `${makeBadge(licenseBadge)}`;
-      writeToFile('./assets/images/badge.svg', badge);
-      return `![License Badge](./assets/images/badge.svg)`;
+      badge = `${makeBadge(licenseBadge)}`; // builds badge code
+      writeToFile('./assets/images/badge.svg', badge); // create badge.svg file
+      return `![License Badge](./assets/images/badge.svg)\n`; // returns MARKDOWN for badge.svg file to be inserted
    } else {
       return ``; // If there is no license, return an empty string
    }
