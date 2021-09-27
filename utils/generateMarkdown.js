@@ -1,6 +1,8 @@
+import { writeFile } from 'fs';
 import { makeBadge, ValidationError } from 'badge-maker'; // import badge-maker into node
 // import Obj data of licenseList obtained from fetch, for use in markdown.
 import licenseList from './licenseList.js';
+import writeToFile from '../index.js';
 
 // declare a Badge object to use with badge-maker program
 const licenseBadge = {
@@ -22,7 +24,9 @@ function renderLicenseBadge(index) {
    // if value is > -1, then there is a license present from the prompts' input data.
    if (index >= 0) {
       licenseBadge.message = `${licenseList.name[index]}`;
-      return `${makeBadge(licenseBadge)}\n\n`;
+      badge = `${makeBadge(licenseBadge)}`;
+      writeToFile('./assets/images/badge.svg', badge);
+      return `![License Badge](./assets/images/badge.svg)`;
    } else {
       return ``; // If there is no license, return an empty string
    }
@@ -47,6 +51,7 @@ function renderLicenseSection(data) {
       let index = licenseList.name.findIndex((elem) => elem === data.licenseType);
       // badge is rendered and assigned through the index value provided above.
       badge = renderLicenseBadge(index);
+      console.log(badge);
       let year = new Date(); // generate Date object for our Copyright message below.
       let section = `## License\n\n`;
       // License name and link is rendered at line 57. (link function from above also used the index value parameter.)

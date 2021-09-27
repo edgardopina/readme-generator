@@ -251,7 +251,7 @@ async function init() {
    // console.log(licenseList);
    //#endregion
 
-   console.log(clearTheScreen);
+   //console.log(clearTheScreen);
    console.log(helpStart);
    return inquirer.prompt(userPrompts);
 }
@@ -266,6 +266,8 @@ init()
       return writeToFile('./README.md', readmePage);
    })
    .finally(() => {
-      console.log(clearTheScreen);
+      //console.log(clearTheScreen);
       console.log(helpEnd);
    });
+
+export default writeToFile;
