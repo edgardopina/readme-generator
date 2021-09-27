@@ -33,6 +33,7 @@ const helpStart = `                           Welcome to the "README.md Generato
 	*italic*
 	_italic_
 	_You **can** combine them_
+   <fake@example.com>
 	http://my.domain.com/landingPage
 	[link description](http://my.domain.com/landingPage)
 	![my alt text] ('./local/path/to/myFile)

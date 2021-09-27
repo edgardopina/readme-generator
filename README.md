@@ -3,7 +3,6 @@
 ![License Badge](./assets/images/badge.svg)
 ## Description
 
-
 Any GitHub project needs a good README.md file that explains the purpose of the application as well as how to install it, run it, contribute to it, and to contact the author(s) for guidance and clarification. This project's goal is to provide a tool built on [node.js](https://nodejs.org/en/about/) that will assist in this process.
 
 The _"README.md Generator"_ app facilitates this process by using the Console to present a series of prompts where the end user is free to select most of the sections of their README.md file. The user is <span style="text-decoration: underline">_required_</span> to enter the "Project Title", "Description", "GitHub username", and their "Email Address"; but, all other recomended sections are presented as optional and the end user can decide if he/she wants to include it or not. Recomended sections are presented with a selection option that defaults to "true", and optional sections are presented with a selection option that defaults to "false".
@@ -18,8 +17,6 @@ This project uses [node.js](https://nodejs.org/en/about/) as the framework and g
 * [License](#license)
 * [Questions](#questions)
 ## Installation
-
-Carefully following these steps to install the _"README.md Generator"_ application in your computer:
 
 1. Create a repository in your GitHUb account, i.e. "readme-generator".
 
@@ -51,7 +48,7 @@ Carefully following these steps to install the _"README.md Generator"_ applicati
 
 2. A help-start message will be displayed at the beginning to provide further instructions about the editor usage and basic markdown syntax.
 
-3. You will be prompted throught the terminal to enter a Project Title and a Descruption. Please note that these are marked as **(Required)**.
+3. You will be prompted throught the terminal to enter a Projectgit ch Title and a Descruption. Please note that these are marked as **(Required)**.
 
 4. Take note that some prompts will deploy a text editor application in order for you to enter the appropriate information.
 
@@ -60,15 +57,15 @@ Carefully following these steps to install the _"README.md Generator"_ applicati
 6. Some optional sections are defaulted to NOT be included, but you can select 'Yes' to include them.
 
 7. At the end of the program, you can _git push_ your files into your GitHub Repository and see your finalized README.md file. If you want to make changes, you can
-   copy and paste from your README.md file into the prompts and make adjustments as needed.
+copy and paste from your README.md file into the prompts and make adjustments as needed. 
 
 8. Please refer to the following video link for additional [usage examples](https://drive.google.com/file/d/1y23PSlKCuoO_wQvGMAcWKsHr1Sp95J6j/view).
 
 ## Credits
 
--  [Simon Boudrias](https://github.com/SBoudrias) creator of the npm [inquirer.js](https://www.npmjs.com/package/inquirer) package.
--  [Xander Rapstine Xandromus](https://github.com/Xandromus) provided seven empty function declarations and one empty function call as starter code for this project.
--  Open-source community - creators of [node.js](https://nodejs.org/en/about/) and [node-fetch](https://www.npmjs.com/package/node-fetch).
+* [Simon Boudrias](https://github.com/SBoudrias) creator of the npm [inquirer.js](https://www.npmjs.com/package/inquirer) package.
+* [Xander Rapstine Xandromus](https://github.com/Xandromus) provided seven empty function declarations and one empty function call as starter code for this project.
+* Open-source community - creators of [node.js](https://nodejs.org/en/about/) and [node-fetch](https://www.npmjs.com/package/node-fetch).
 
 ## License
 
@@ -85,5 +82,5 @@ README Generator created by [JoseEPina](https://github.com/JoseEPina).
 
 For any additional questions or comments, please send a message to the following address:
 
-GitHub Email Address: [jose.edpina@gmail.com](<jose.edpina@gmail.com>)
+GitHub Email Address: <jose.edpina@gmail.com>
 
