@@ -128,7 +128,7 @@ function generateMarkdown(data) {
 README Generator created by [${data.gitHubUser}](https://github.com/${data.gitHubUser}).\n
 For any additional questions or comments, please send a message to the following address:
 
-GitHub Email Address: [${data.email}](${data.email})\n\n`;
+GitHub Email Address: [${data.email}](<${data.email}>)\n\n`;
       TOC += `* [Questions](#questions)\n`;
    }
    // console.log(title + badge + description + TOC + content); //console.log left for testing

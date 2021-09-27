@@ -3,6 +3,7 @@
 ![License Badge](./assets/images/badge.svg)
 ## Description
 
+
 Any GitHub project needs a good README.md file that explains the purpose of the application as well as how to install it, run it, contribute to it, and to contact the author(s) for guidance and clarification. This project's goal is to provide a tool built on [node.js](https://nodejs.org/en/about/) that will assist in this process.
 
 The _"README.md Generator"_ app facilitates this process by using the Console to present a series of prompts where the end user is free to select most of the sections of their README.md file. The user is <span style="text-decoration: underline">_required_</span> to enter the "Project Title", "Description", "GitHub username", and their "Email Address"; but, all other recomended sections are presented as optional and the end user can decide if he/she wants to include it or not. Recomended sections are presented with a selection option that defaults to "true", and optional sections are presented with a selection option that defaults to "false".
@@ -44,7 +45,6 @@ Carefully following these steps to install the _"README.md Generator"_ applicati
 
 12.   From your local main branch run the application by entering: **_node index_** in the terminal prompt.
 
-
 ## Usage
 
 1. After completing Installation Instructions, launch the application through the terminal with the command: _**node index**_.
@@ -63,7 +63,6 @@ Carefully following these steps to install the _"README.md Generator"_ applicati
    copy and paste from your README.md file into the prompts and make adjustments as needed.
 
 8. Please refer to the following video link for additional [usage examples](https://drive.google.com/file/d/1y23PSlKCuoO_wQvGMAcWKsHr1Sp95J6j/view).
-
 
 ## Credits
 
@@ -86,5 +85,5 @@ README Generator created by [JoseEPina](https://github.com/JoseEPina).
 
 For any additional questions or comments, please send a message to the following address:
 
-GitHub Email Address: [jose.edpina@gmail.com](jose.edpina@gmail.com)
+GitHub Email Address: [jose.edpina@gmail.com](<jose.edpina@gmail.com>)
 
